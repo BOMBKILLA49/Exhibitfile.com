@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ExhibitFile – Document everything. Be ready for court.</title>
+<meta name="description" content="ExhibitFile is a private journal for documenting what happens — screenshots, photos, documents and receipts — and turning it into an organized binder your lawyer can use. For custody, divorce, landlord and workplace cases.">
+<meta property="og:title" content="ExhibitFile – Document everything. Be ready for court.">
+<meta property="og:description" content="Organize screenshots, notes, documents and receipts by date and by what they prove. Make a lawyer-ready PDF binder in one tap.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://exhibitfile.com/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://exhibitfile.com/">
+<style>
+  :root {
+    --navy: #1F3A5F; --navy-deep: #0F2340; --navy-soft: #E6ECF4; --gold: #E5AE42; --gold-deep: #B9821A;
+    --bg: #F7F8FA; --card: #FFFFFF; --text: #141A22; --muted: #5B6472; --border: #E1E4E9;
+    --green: #1E7A46; --red: #C0362C; --amber: #C58A16;
+    --radius: 18px; --max: 1160px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0D1015; --card: #171B22; --text: #E8EBF0; --muted: #9AA3AF; --border: #282E38; --navy-soft: #1E2A3A;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font: 17px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+  h1, h2, h3 { line-height: 1.12; letter-spacing: -0.02em; }
+  h2 { font-size: clamp(30px, 4.2vw, 46px); font-weight: 800; }
+  h3 { font-size: 20px; font-weight: 700; }
+  .kicker { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-deep); }
+  .lead { font-size: clamp(18px, 2vw, 21px); color: var(--muted); max-width: 640px; }
+  section { padding: 96px 0; }
+  .center { text-align: center; } .center .lead { margin: 16px auto 0; }
+
+  /* nav */
+  header { position: sticky; top: 0; z-index: 20; background: rgba(15,35,64,.86); backdrop-filter: saturate(180%) blur(14px); -webkit-backdrop-filter: saturate(180%) blur(14px); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-weight: 800; font-size: 20px; letter-spacing: -.01em; }
+  .brand img { width: 30px; height: 30px; }
+  .brand b { color: var(--gold); font-weight: 800; }
+  .navlinks { display: flex; gap: 28px; align-items: center; }
+  .navlinks a { color: #C9D6E8; text-decoration: none; font-size: 15px; font-weight: 500; }
+  .navlinks a:hover { color: #fff; }
+  .navlinks .cta { background: var(--gold); color: var(--navy-deep); padding: 9px 16px; border-radius: 999px; font-weight: 700; }
+  @media (max-width: 860px) { .navlinks a:not(.cta) { display: none; } }
+
+  /* buttons */
+  .btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 14px; font-weight: 700; font-size: 16px; text-decoration: none; transition: transform .15s ease, box-shadow .15s ease; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-store { background: #000; color: #fff; box-shadow: 0 8px 24px rgba(0,0,0,.25); }
+  .btn-store small { display: block; font-size: 11px; font-weight: 500; opacity: .8; line-height: 1.1; }
+  .btn-store span { line-height: 1.15; }
+  .btn-ghost { border: 1.5px solid rgba(255,255,255,.35); color: #fff; }
+  .btn-ghost:hover { border-color: #fff; }
+
+  /* hero */
+  .hero { background: radial-gradient(1100px 700px at 78% 30%, #2A4C78 0%, var(--navy) 45%, var(--navy-deep) 100%); color: #fff; padding: 72px 0 0; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 40px; align-items: center; }
+  .hero h1 { font-size: clamp(40px, 6vw, 68px); font-weight: 850; letter-spacing: -0.035em; }
+  .hero h1 em { font-style: normal; color: var(--gold); }
+  .hero .lead { color: #C9D6E8; margin-top: 20px; }
+  .trust { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 30px; font-size: 14.5px; color: #C9D6E8; }
+  .trust span::before { content: "✓"; color: var(--gold); font-weight: 800; margin-right: 7px; }
+  .hero-art { position: relative; height: 600px; }
+  @media (max-width: 920px) { .hero-grid { grid-template-columns: 1fr; } .hero-art { height: 680px; margin-top: 10px; } }
+  @media (max-width: 520px) { .phone { margin-left: -150px; } .hero .page.p1, .hero .page.p2 { display: none; } }
+
+  /* phone mockup */
+  .phone { position: absolute; left: 50%; top: 20px; width: 300px; height: 610px; margin-left: -110px; border-radius: 46px; background: #0B0D10; padding: 11px;
+    box-shadow: 0 40px 80px rgba(0,0,0,.45), inset 0 0 0 2px #2A2F37; color: var(--text); }
+  .screen { width: 100%; height: 100%; border-radius: 36px; background: #F4F5F7; overflow: hidden; font-size: 11px; position: relative; color: #141A22; }
+  .island { position: absolute; top: 9px; left: 50%; width: 82px; height: 24px; margin-left: -41px; background: #000; border-radius: 14px; }
+  .s-status { height: 38px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 24px 4px; font-weight: 600; font-size: 11px; }
+  .s-nav { display: flex; justify-content: space-between; padding: 8px 14px 2px; color: var(--navy); font-size: 11.5px; }
+  .s-title { font-size: 16px; font-weight: 800; padding: 2px 14px 8px; }
+  .s-body { padding: 0 12px; display: flex; flex-direction: column; gap: 7px; }
+  .s-seg { display: flex; background: #E6ECF4; border-radius: 8px; padding: 2px; }
+  .s-seg div { flex: 1; text-align: center; padding: 5px 0; border-radius: 6px; color: #5B6472; font-weight: 500; }
+  .s-seg .on { background: #fff; color: #141A22; font-weight: 700; }
+  .s-sec { font-size: 8.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #5B6472; margin-top: 3px; }
+  .s-card { background: #fff; border: 1px solid #E1E4E9; border-radius: 10px; padding: 8px 9px; display: flex; gap: 8px; align-items: center; }
+  .s-card .t { font-weight: 650; font-size: 11px; line-height: 1.25; } .s-card .d { color: var(--navy); font-weight: 600; font-size: 9px; } .s-card .m { color: #5B6472; font-size: 9px; }
+  .s-grow { flex: 1; min-width: 0; }
+  .dot { width: 6px; height: 6px; border-radius: 3px; flex: none; display: inline-block; }
+  .thumb { width: 34px; height: 34px; border-radius: 6px; flex: none; }
+  .t-sms { background: #fff; border: 1px solid #E1E4E9; padding: 4px; display: flex; flex-direction: column; gap: 2px; justify-content: center; }
+  .t-sms i { display: block; height: 4px; border-radius: 2px; background: #E3E5E9; } .t-sms i.me { background: #3D8BFD; margin-left: 30%; }
+  .t-rcpt { background: #FBFBF7; border: 1px solid #E1E4E9; padding: 4px 6px; display: flex; flex-direction: column; gap: 2px; } .t-rcpt i { display: block; height: 2px; background: #BFC3C8; }
+  .t-pdf { background: #FDECEA; color: #B42318; font-weight: 800; font-size: 8px; display: flex; align-items: center; justify-content: center; }
+  .money { font-weight: 700; font-size: 10.5px; }
+  .s-fab { position: absolute; right: 12px; bottom: 18px; background: var(--navy); color: #fff; font-weight: 700; padding: 9px 14px; border-radius: 20px; font-size: 12px; box-shadow: 0 4px 10px rgba(0,0,0,.25); }
+
+  /* binder pages */
+  .page { position: absolute; width: 190px; height: 246px; background: #fff; border-radius: 6px; box-shadow: 0 24px 50px rgba(0,0,0,.35); padding: 16px 14px; color: #141A22; font-size: 7.5px; overflow: hidden; }
+  .page h4 { font-size: 11px; color: var(--navy); border-bottom: 1.5px solid var(--navy); padding-bottom: 2px; margin-bottom: 6px; }
+  .page .ln { height: 4px; border-radius: 2px; background: #E6E8EC; margin: 5px 0; }
+  .page .tr { display: flex; gap: 6px; border-bottom: 1px solid #EEF0F3; padding: 3px 0; }
+  .hero .page.p1 { left: 0; top: 150px; transform: rotate(-8deg); }
+  .hero .page.p2 { left: 70px; top: 300px; transform: rotate(-3deg); }
+  @media (max-width: 920px) { .hero .page.p1 { left: 4%; } .hero .page.p2 { left: 12%; } }
+
+  /* cards & grids */
+  .grid { display: grid; gap: 20px; }
+  .g4 { grid-template-columns: repeat(4, 1fr); } .g3 { grid-template-columns: repeat(3, 1fr); } .g2 { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 980px) { .g4 { grid-template-columns: repeat(2, 1fr); } .g3 { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .g4, .g3, .g2 { grid-template-columns: 1fr; } section { padding: 72px 0; } }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px; }
+  .card p { color: var(--muted); margin-top: 8px; font-size: 16px; }
+  .icon { width: 44px; height: 44px; border-radius: 12px; background: var(--navy-soft); color: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 14px; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .icon { color: #8DB3E2; } }
+  .step-n { width: 34px; height: 34px; border-radius: 17px; background: var(--gold); color: var(--navy-deep); font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+  .head { margin-bottom: 44px; }
+
+  /* question band */
+  .question { background: var(--navy-deep); color: #fff; }
+  .quote { font-size: clamp(26px, 3.6vw, 40px); font-weight: 800; line-height: 1.2; letter-spacing: -.02em; }
+  .quote span { color: var(--gold); }
+  .question .lead { color: #C9D6E8; margin-top: 18px; }
+
+  /* concept diagram */
+  .concept { display: grid; grid-template-columns: 340px 1fr; gap: 0; align-items: center; margin-top: 10px; }
+  .concept .case { background: var(--navy); color: #fff; border-radius: 20px; padding: 26px 28px; box-shadow: 0 20px 40px rgba(31,58,95,.25); position: relative; z-index: 1; }
+  .concept .case small { display: block; font-size: 12px; letter-spacing: .14em; font-weight: 700; color: var(--gold); text-transform: uppercase; }
+  .concept .case strong { font-size: 26px; display: block; margin-top: 4px; }
+  .concept .case p { color: #C9D6E8; font-size: 15px; margin-top: 6px; }
+  .points { display: flex; flex-direction: column; gap: 14px; padding-left: 48px; position: relative; }
+  .points::before { content: ""; position: absolute; left: 18px; top: 26px; bottom: 26px; border-left: 3px solid var(--gold); border-radius: 2px; }
+  .point { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; position: relative; display: flex; gap: 12px; align-items: flex-start; }
+  .point::before { content: ""; position: absolute; left: -30px; top: 50%; width: 30px; border-top: 3px solid var(--gold); }
+  .point small { display: block; font-size: 11px; letter-spacing: .12em; font-weight: 700; color: var(--muted); text-transform: uppercase; }
+  .point b { font-size: 17px; }
+  .point .ev { color: var(--muted); font-size: 14px; margin-top: 2px; }
+  .concept-note { margin-top: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .note { border-left: 4px solid var(--gold); background: var(--card); border-radius: 12px; padding: 16px 20px; font-size: 16px; }
+  .note.blue { border-left-color: #8DB3E2; }
+  @media (max-width: 860px) { .concept { grid-template-columns: 1fr; gap: 26px; } .points { padding-left: 34px; } .points::before { left: 8px; } .point::before { left: -26px; width: 26px; } .concept-note { grid-template-columns: 1fr; } }
+
+  /* cases tabs */
+  .cases .card h3 { display: flex; align-items: center; gap: 10px; }
+  .cases .card ul { list-style: none; margin-top: 14px; display: flex; flex-direction: column; gap: 9px; }
+  .cases .card li { font-size: 15px; padding: 10px 12px; border-radius: 10px; background: var(--bg); border: 1px solid var(--border); display: flex; gap: 9px; }
+  .cases .card li::before { content: "⚑"; color: var(--gold-deep); }
+  .cases .tag { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  /* binder section */
+  .binder { background: linear-gradient(180deg, var(--bg) 0%, var(--navy-soft) 100%); }
+  .binder-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 50px; align-items: center; }
+  .fan { position: relative; height: 380px; }
+  .fan .page { width: 220px; height: 285px; font-size: 8.5px; }
+  .fan .page h4 { font-size: 12.5px; }
+  .fan .page:nth-child(1) { left: 0; top: 60px; transform: rotate(-9deg); }
+  .fan .page:nth-child(2) { left: 22%; top: 30px; transform: rotate(-3deg); }
+  .fan .page:nth-child(3) { left: 44%; top: 40px; transform: rotate(3deg); }
+  .checks { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+  .checks li { display: flex; gap: 12px; font-size: 16.5px; }
+  .checks li::before { content: "✓"; flex: none; width: 24px; height: 24px; border-radius: 12px; background: var(--green); color: #fff; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  @media (max-width: 900px) { .binder-grid { grid-template-columns: 1fr; } .fan { height: 340px; } .fan .page:nth-child(3) { left: 40%; } }
+
+  /* privacy */
+  .privacy { background: var(--navy); color: #fff; }
+  .privacy .card { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.12); }
+  .privacy .card p { color: #C9D6E8; }
+  .privacy .icon { background: rgba(229,174,66,.18); color: var(--gold); }
+  .privacy .lead { color: #C9D6E8; }
+
+  /* faq */
+  details { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 18px 22px; }
+  details + details { margin-top: 12px; }
+  summary { cursor: pointer; font-weight: 700; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--gold-deep); font-size: 22px; line-height: 1; }
+  details[open] summary::after { content: "–"; }
+  details p { color: var(--muted); margin-top: 10px; }
+  .faq { max-width: 820px; margin: 0 auto; }
+
+  /* final cta & footer */
+  .final { background: radial-gradient(900px 500px at 50% 0%, #2A4C78 0%, var(--navy) 50%, var(--navy-deep) 100%); color: #fff; text-align: center; }
+  .final .lead { color: #C9D6E8; margin: 16px auto 0; }
+  .final .btns { justify-content: center; }
+  footer { background: var(--navy-deep); color: #9FB0C7; font-size: 14px; padding: 36px 0 44px; }
+  .foot { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: center; }
+  .foot nav { display: flex; gap: 22px; } .foot a { color: #C9D6E8; text-decoration: none; } .foot a:hover { color: #fff; }
+  .disclaimer { margin-top: 20px; font-size: 13px; color: #7F90A8; max-width: 860px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top"><img src="favicon.svg" alt=""><span>Exhibit<b>File</b></span></a>
+    <nav class="navlinks" aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#cases">Who it’s for</a>
+      <a href="#binder">Binders</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#faq">FAQ</a>
+      <a class="cta" href="#get">Get the app</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div style="padding-bottom:72px">
+        <div class="kicker" style="color:var(--gold)">For custody, divorce, landlord &amp; workplace cases</div>
+        <h1 style="margin-top:14px">Document everything.<br><em>Be ready</em> when it counts.</h1>
+        <p class="lead">ExhibitFile is a private journal for what’s happening in your case — screenshots, photos, documents and receipts — organized by date and by what they prove. When you need it, it becomes a binder your lawyer can actually use.</p>
+        <div class="btns">
+          <a class="btn btn-store" href="#get" aria-label="Coming soon on the App Store">
+            <svg width="22" height="26" viewBox="0 0 17 20" fill="#fff" aria-hidden="true"><path d="M14.1 10.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9C3.6 4.8 2 5.8 1.1 7.4c-1.9 3.2-.5 8 1.3 10.6.9 1.3 1.9 2.7 3.3 2.6 1.3-.1 1.8-.8 3.4-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.2-2.6 1-1.5 1.4-2.9 1.4-3-.1 0-2.9-1.1-3-4.4zM11.5 3c.7-.9 1.2-2.1 1.1-3.3-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.2 1.2.1 2.3-.6 3-1.5z"/></svg>
+            <span><small>Coming soon on the</small>App Store</span>
+          </a>
+          <a class="btn btn-ghost" href="#how">See how it works</a>
+        </div>
+        <div class="trust"><span>Stays on your phone</span><span>No account needed</span><span>Lawyer-ready PDF binders</span></div>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="page p1">
+          <h4>Timeline</h4>
+          <div class="tr"><b>Jan 5</b><span>Lease renewal – both names</span></div>
+          <div class="tr"><b>Sep 30</b><span>“Pick up milk on your way home”</span></div>
+          <div class="tr"><b>Oct 15</b><span>“I’m staying until the 22nd”</span></div>
+          <div class="tr"><b>Oct 22</b><span>Took their things and left</span></div>
+          <div class="tr"><b>Oct 23</b><span>“I’m at my mom’s now”</span></div>
+          <div class="ln"></div><div class="ln" style="width:70%"></div>
+        </div>
+        <div class="page p2">
+          <b style="font-size:11px">Exhibit 9a</b>
+          <div style="color:#5B6472;margin:2px 0 5px">Date of event: October 22, 2025</div>
+          <div><b>What this shows:</b> Texted “I’m leaving tonight” and took their clothes and the TV.</div>
+          <div style="margin:9px auto 0;width:96px;height:130px;border:1px solid #D6DBE2;border-radius:6px;padding:7px;display:flex;flex-direction:column;gap:6px">
+            <i style="display:block;height:9px;width:70%;background:#E3E5E9;border-radius:5px"></i>
+            <i style="display:block;height:9px;width:60%;margin-left:40%;background:#3D8BFD;border-radius:5px"></i>
+            <i style="display:block;height:9px;width:80%;background:#E3E5E9;border-radius:5px"></i>
+          </div>
+        </div>
+        <div class="phone">
+          <div class="screen">
+            <div class="island"></div>
+            <div class="s-status"><span>9:41</span><span>●●● ▮</span></div>
+            <div class="s-nav"><span>‹ Custody – Johnson</span><span>✎ Edit &nbsp;<b>Binder</b></span></div>
+            <div class="s-title">They moved out on Oct 22, 2025 — not earlier</div>
+            <div class="s-body">
+              <div style="color:#5B6472;font-size:9.5px"><span class="dot" style="background:#C0362C"></span> High priority · 9 entries · Jan 2024 – Oct 2025</div>
+              <div class="s-sec">Proof, oldest first</div>
+              <div class="s-card"><div class="s-grow"><div class="t"><span class="dot" style="background:#C58A16"></span> Lease renewal — both our names</div><div class="d">Jan 5, 2024</div><div class="m">1 document · lived here</div></div><div class="thumb t-pdf">PDF</div></div>
+              <div class="s-card"><div class="s-grow"><div class="t"><span class="dot" style="background:#C58A16"></span> Text: “Pick up milk on your way home”</div><div class="d">Sep 30, 2025</div><div class="m">1 screenshot · still living here</div></div><div class="thumb t-sms"><i></i><i class="me"></i><i></i><i class="me"></i></div></div>
+              <div class="s-card"><div class="s-grow"><div class="t"><span class="dot" style="background:#C0362C"></span> Text: “I’m staying until the 22nd”</div><div class="d">Oct 15, 2025</div><div class="m">2 screenshots</div></div><div class="thumb t-sms"><i></i><i class="me"></i><i></i><i></i><i class="me"></i></div></div>
+              <div class="s-card" style="border-color:#E5AE42;box-shadow:0 0 0 1.5px #E5AE42"><div class="s-grow"><div class="t"><span class="dot" style="background:#C0362C"></span> Took their things and left</div><div class="d">Oct 22, 2025</div><div class="m">3 screenshots · 2 photos</div></div><div class="thumb t-sms"><i class="me"></i><i></i><i class="me"></i><i></i></div></div>
+              <div class="s-card"><div class="s-grow"><div class="t"><span class="dot" style="background:#C0362C"></span> Text: “I’m at my mom’s now”</div><div class="d">Oct 23, 2025</div><div class="m">1 screenshot</div></div><div class="thumb t-sms"><i></i><i class="me"></i><i></i></div></div>
+            </div>
+            <div class="s-fab">＋ Add</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE QUESTION -->
+  <section class="question">
+    <div class="wrap center">
+      <p class="quote">“When did they move out?”<br><span>“How do you support your son?”</span></p>
+      <p class="lead">Questions like these come up in court — usually when phones aren’t allowed. ExhibitFile keeps every answer dated, organized and backed by proof, so you’re not scrolling through two years of texts trying to remember.</p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="wrap">
+      <div class="head center">
+        <div class="kicker">How it works</div>
+        <h2 style="margin-top:10px">Four steps. No legal background needed.</h2>
+      </div>
+      <div class="grid g4">
+        <div class="card"><div class="step-n">1</div><h3>Create a case</h3><p>One case for each situation — like your custody case. Name it something your lawyer will recognize.</p></div>
+        <div class="card"><div class="step-n">2</div><h3>Write what you’re proving</h3><p>In your own words: “They moved out on Oct 22, not earlier.” Each point gets its own evidence, in date order.</p></div>
+        <div class="card"><div class="step-n">3</div><h3>Add entries &amp; receipts</h3><p>Pick the day, write what happened and attach screenshots, photos, PDFs or receipts. Note what each one shows.</p></div>
+        <div class="card"><div class="step-n">4</div><h3>Make a binder</h3><p>One tap creates an organized PDF with a timeline and numbered exhibits — to send your lawyer or print for court.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY IDEA -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="head">
+        <div class="kicker">The key idea</div>
+        <h2 style="margin-top:10px">One case per situation.<br>Everything you’re proving goes inside it.</h2>
+      </div>
+      <div class="concept">
+        <div class="case"><small>Case</small><strong>Custody – Johnson</strong><p>Custody / Co-parenting</p></div>
+        <div class="points">
+          <div class="point"><div><small>Proving</small><b>I’m an active parent — I pay for my son’s needs</b><div class="ev">38 receipts · school documents · doctor visits</div></div></div>
+          <div class="point"><div><small>Proving</small><b>They moved out on Oct 22, 2025 — not earlier</b><div class="ev">Text screenshots · notes · the date each one happened</div></div></div>
+          <div class="point"><div><small>Proving</small><b>I handle school and doctor visits</b><div class="ev">Report cards · appointment reminders · teacher emails</div></div></div>
+        </div>
+      </div>
+      <div class="concept-note">
+        <div class="note">One screenshot can support more than one point — and it all stays in one place, in one binder.</div>
+        <div class="note blue">A <b>different</b> situation, like a landlord dispute, gets its own separate case.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section style="background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+    <div class="wrap">
+      <div class="head center">
+        <div class="kicker">Built for real life</div>
+        <h2 style="margin-top:10px">Everything a lawyer wishes you’d kept</h2>
+        <p class="lead">Designed around what makes records believable and easy to use in court.</p>
+      </div>
+      <div class="grid g3">
+        <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div><h3>Calendar &amp; search</h3><p>See what happened on any day, jump to any year, or search “groceries” and find every related entry and receipt.</p></div>
+        <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></div><h3>Screenshots with their own dates</h3><p>A text from October 22 is filed under October 22 — even if you screenshot it weeks later. Note what it shows and what’s missing.</p></div>
+        <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M16.5 7.5C16 6 14.2 5 12 5 9.5 5 7.5 6.3 7.5 8.3 7.5 13 16.5 10.5 16.5 15.5c0 2-2 3.5-4.5 3.5-2.4 0-4.2-1.1-4.6-2.8"/></svg></div><h3>Receipts &amp; spending</h3><p>Snap a receipt, pick a category and see totals by category and month — like everything you’ve spent on school or sports.</p></div>
+        <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></div><h3>PDFs &amp; documents</h3><p>Attach court orders, school records, medical paperwork and bank statements. They’re added to your binder with every page labeled.</p></div>
+        <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9h14M5 15h14M10 4 8 20M16 4l-2 16"/></svg></div><h3>Numbered exhibits</h3><p>Photos from one entry become one exhibit with pages — 7a, 7b, 7c — numbered the same way in every binder you send.</p></div>
+        <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg></div><h3>Recorded &amp; edit history</h3><p>Every entry shows when it was written and whether it was edited — the kind of detail that makes records credible.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section id="cases" class="cases">
+    <div class="wrap">
+      <div class="head center">
+        <div class="kicker">Who it’s for</div>
+        <h2 style="margin-top:10px">Any situation where dates and proof matter</h2>
+        <p class="lead">You don’t need to be in court yet. Many people start documenting early — and are glad they did.</p>
+      </div>
+      <div class="grid g2">
+        <div class="card"><h3>👨‍👩‍👦 Custody &amp; co-parenting</h3><div class="tag">Parenting time, living situation, the kids’ needs, receipts</div>
+          <ul><li>I’m an active parent — I pay for my child’s needs</li><li>They moved out on Oct 22 — not earlier</li><li>Missed or late parenting time</li></ul></div>
+        <div class="card"><h3>💍 Divorce &amp; separation</h3><div class="tag">Separation date, accounts and bills, property, receipts</div>
+          <ul><li>We separated on March 3, 2025</li><li>I’ve paid the mortgage and utilities since</li><li>The truck was taken without an agreement</li></ul></div>
+        <div class="card"><h3>🏠 Landlord &amp; tenant</h3><div class="tag">Repairs, rent, notices, the unit’s condition</div>
+          <ul><li>I reported the leak 5 times and it wasn’t fixed</li><li>The landlord entered without notice</li><li>I paid rent on time every month</li></ul></div>
+        <div class="card"><h3>💼 Workplace</h3><div class="tag">Incidents, HR reports, pay and schedule changes</div>
+          <ul><li>I reported the problem to HR on June 12</li><li>My hours were cut after I reported it</li><li>There’s a pattern of incidents since January</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BINDER -->
+  <section id="binder" class="binder">
+    <div class="wrap binder-grid">
+      <div class="fan" aria-hidden="true">
+        <div class="page">
+          <div style="font-size:15px;font-weight:800;margin-top:30px">Custody – Johnson</div>
+          <div style="color:#5B6472;margin:3px 0 12px">Custody / Co-parenting — Binder</div>
+          <div style="font-weight:700">Contents</div>
+          <div class="ln"></div><div class="ln"></div><div class="ln" style="width:80%"></div><div class="ln" style="width:65%"></div><div class="ln" style="width:72%"></div>
+        </div>
+        <div class="page">
+          <div style="font-size:7px;font-weight:700;color:#5B6472">WHAT THIS SHOWS</div>
+          <h4>They moved out on Oct 22, 2025 — not earlier</h4>
+          <b>Wednesday, October 22, 2025</b><div>Took their things and left</div>
+          <div class="ln"></div><div class="ln" style="width:80%"></div>
+          <div style="color:#5B6472;margin-top:4px">Exhibit 9 · Recorded Oct 22, 2025, 10:02 PM · never edited</div>
+          <div class="ln" style="margin-top:12px"></div><div class="ln" style="width:60%"></div>
+        </div>
+        <div class="page">
+          <h4>Spending Summary</h4>
+          <div style="font-size:20px;font-weight:800;color:var(--navy)">$1,842.67</div>
+          <div style="color:#5B6472;margin-bottom:6px">38 receipts</div>
+          <div class="tr"><span style="flex:1">Food</span><b>$712.40</b></div>
+          <div class="tr"><span style="flex:1">School</span><b>$396.15</b></div>
+          <div class="tr"><span style="flex:1">Activities</span><b>$360.00</b></div>
+          <div class="tr"><span style="flex:1">Clothing</span><b>$274.12</b></div>
+          <div class="tr"><span style="flex:1">Medical</span><b>$100.00</b></div>
+        </div>
+      </div>
+      <div>
+        <div class="kicker">The binder</div>
+        <h2 style="margin-top:10px">Hand your lawyer something they can use</h2>
+        <p class="lead" style="margin-top:14px">Lawyers bill by the hour. A shoebox of screenshots costs you time and money — an organized binder saves both.</p>
+        <ul class="checks">
+          <li>A timeline of everything, oldest first</li>
+          <li>A section for each point you’re proving, with its evidence</li>
+          <li>Numbered exhibits with your notes beside each one</li>
+          <li>A spending summary with totals by category and month</li>
+          <li>Print it for court, or send just one point or just your receipts</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVACY -->
+  <section id="privacy" class="privacy">
+    <div class="wrap">
+      <div class="head center">
+        <div class="kicker" style="color:var(--gold)">Private by design</div>
+        <h2 style="margin-top:10px">Your case stays on your phone</h2>
+        <p class="lead">What you document is sensitive. ExhibitFile was built so it stays yours.</p>
+      </div>
+      <div class="grid g3">
+        <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div><h3>Nothing uploaded</h3><p>Your entries, photos and receipts are stored only on your device. We never see them.</p></div>
+        <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/><path d="M3 3l18 18"/></svg></div><h3>No account, no tracking</h3><p>No sign-up, no ads, no analytics following you around.</p></div>
+        <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8.5 8 9 4.5-.5 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div><h3>App Lock</h3><p>Require Face ID or your passcode to open the app, and the screen is hidden in the app switcher.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="head center">
+        <div class="kicker">Questions</div>
+        <h2 style="margin-top:10px">Frequently asked</h2>
+      </div>
+      <div class="faq">
+        <details><summary>Do I need to be in court already?</summary><p>No. Many people start documenting when they first think they might need records someday. Notes written at the time things happen are far more convincing than memories pieced together later.</p></details>
+        <details><summary>Can I add screenshots from months or years ago?</summary><p>Yes. Every screenshot and photo gets its own “date this happened,” so a text from 2023 is filed under 2023 even if you add it today.</p></details>
+        <details><summary>Should I make a separate case for each thing I want to prove?</summary><p>No — make one case for each situation (for example, your custody case) and add each thing you want to prove as a point inside it. That way one piece of evidence can support several points, and everything ends up in one binder.</p></details>
+        <details><summary>Will my lawyer be able to use the binder?</summary><p>That’s what it’s designed for: a dated timeline, a section per point, numbered exhibits with your notes, and a spending summary — in a standard PDF they can read, print or share.</p></details>
+        <details><summary>Who can see what I put in the app?</summary><p>Only you. Everything stays on your phone unless you choose to share a binder. You can also turn on App Lock so the app needs Face ID or your passcode to open.</p></details>
+        <details><summary>Is ExhibitFile legal advice?</summary><p>No. ExhibitFile is a record-keeping tool. It helps you organize your information; it doesn’t replace a lawyer. Talk to an attorney about your situation, and only record calls or audio where your state’s law allows it.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section id="get" class="final">
+    <div class="wrap">
+      <h2>Start documenting today.</h2>
+      <p class="lead">The best time to start keeping records was when it started. The second best time is now.</p>
+      <div class="btns">
+        <span class="btn btn-store" aria-label="Coming soon on the App Store">
+          <svg width="22" height="26" viewBox="0 0 17 20" fill="#fff" aria-hidden="true"><path d="M14.1 10.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9C3.6 4.8 2 5.8 1.1 7.4c-1.9 3.2-.5 8 1.3 10.6.9 1.3 1.9 2.7 3.3 2.6 1.3-.1 1.8-.8 3.4-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.2-2.6 1-1.5 1.4-2.9 1.4-3-.1 0-2.9-1.1-3-4.4zM11.5 3c.7-.9 1.2-2.1 1.1-3.3-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.2 1.2.1 2.3-.6 3-1.5z"/></svg>
+          <span><small>Coming soon on the</small>App Store</span>
+        </span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a class="brand" href="#top" style="font-size:18px"><img src="favicon.svg" alt="" style="width:26px;height:26px"><span>Exhibit<b>File</b></span></a>
+      <nav aria-label="Footer"><a href="#how">How it works</a><a href="#faq">FAQ</a><!-- <a href="privacy.html">Privacy Policy</a> — add back once privacy.html is published --></nav>
+    </div>
+    <p class="disclaimer">ExhibitFile is a record-keeping tool and does not provide legal advice. It is not a law firm and is not a substitute for an attorney. Examples on this page are illustrative. © <span id="yr">2026</span> ExhibitFile.</p>
+  </div>
+</footer>
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>
